@@ -38,11 +38,10 @@ read subnet && echo -e ""
 echo -e "${GR}Insert ceph replica count ${NC}\n"
 read replicas && echo -e ""
 
-echo -e "ceph-deploy new $node"
-echo -e ""
+ceph-deploy new $node
 echo -e "${GR}Modifyinng ceph cluster config file... ${NC}\n" && echo "public network = $subnet" >> ceph.conf && echo "osd pool default pg num = 100" >> ceph.conf && echo "osd pool default pgp num = 100" >> ceph.conf
 cat ceph.conf
-echo -e ""
+
 }
 function install_base_packages () {
 unset xargs
