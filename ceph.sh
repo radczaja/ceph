@@ -58,17 +58,17 @@ if [[ $args =~ ^-?[0-9]+$ ]]; then
 	done
 else
 	echo -e "Insert an integer"
-	read_all_args
+	install_base_packages
 fi
 
-echo -e "ceph-deploy install $node ${xargs[*]}"
+ceph-deploy install $node ${xargs[*]}
 echo -e ""
 }
 function deploy_initial_monitor () {
 echo -e "${GR}Deploying intial monitor function...${NC}"
 echo -e "${GR}Monitor will be setup on initial node...${NC}\n"
 
-echo -e "ceph-deploy mon create-initial"
+ceph-deploy mon create-initial $node
 
 echo -e "${GR}Initial monitor created${NC}"
 }
@@ -79,8 +79,7 @@ echo -e "${GR}Changing ownership privileges...${NC}\n"
 
 	for i in "${xargs[@]}"
 		do
-			ssh -o StrictHostKeyChecking=no -t root@$i "mkdir -p /var/local/osd0 && mkdir -p /var/local/osd1 && chown ceph:ceph /var/local/osd0 && chown ceph:ceph /var/local/osd1 && exit"
-		#chown ceph:ceph /dev/sda1
+			ssh -o StrictHostKeyChecking=no -t root@$i "mkdir -p /var/local/osd0 && mkdir -p /var/local/osd1 && chown ceph:ceph /var/local/osd0 && chown ceph:ceph /var/local/osd1 && chown ceph:ceph /dev/sda1 && exit"
 		done
 echo -e "${GR}Finshed creating osd directories${NC}\n"
 }
