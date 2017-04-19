@@ -1,6 +1,6 @@
 About
 -----
-Deployment tool for  full Ceph Jewel 
+Deployment tool for Ceph Jewel 
 
 Supported
 ---------
@@ -8,3 +8,7 @@ Supported
 2) mds creation
 3) rgw creation
 4) monitor creation
+
+Planned
+-------
+Add support for checking prerequisites
